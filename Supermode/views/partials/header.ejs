@@ -8,5 +8,17 @@
 <body>
   <nav>
     <h1><a href="/">Supermode</a></h1>
+    <ul>
+      <% if (user) { %>
+      <li><%= user.username%></li>
+      <% if (user.admin){%>
+        <li><a href="/veileder">veileder</a></li>
+        <%}%>
+      <li><a href="/logout">Logout</a></li>
+      <% }else {%>
+      <li><a href="/login">Login</a></li>
+      <li><a href="/signup">Signup</a></li>
+      <% }%>
+    </ul>
   </nav>
-  
+ 

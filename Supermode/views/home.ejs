@@ -1,10 +1,65 @@
 <%- include('partials/header'); -%>
+<script>
+  let score = 0;
+
+// Lag en variabel for å holde antall liv
+let lives = 3;
+
+// Lag en variabel for å holde hastighetsnivået
+let speedLevel = 1;
+
+// Lag en funksjon for å starte spillet
+function startGame() {
+  // Sett opp spillet og vis introduksjonsskjermen
+}
+
+// Lag en funksjon for å bevege den røde firkanten
+function moveRedSquare() {
+  // Legg til kode for å bevege den røde firkanten på skjermen
+  // Bruk en tilfeldig retning og en tilfeldig hastighet mellom 2 og 10 sekunder
+}
+
+// Lag en funksjon for å øke hastighetsnivået
+function increaseSpeedLevel() {
+  // Øk hastighetsnivået med 50% fra den nåværende hastigheten
+  // Sett en timeout for å kalle denne funksjonen igjen etter 1 minutt
+}
+
+// Lag en funksjon for å sjekke om spilleren har dødd
+function checkDeath() {
+  // Legg til kode for å sjekke om spilleren har tapt et liv eller har null liv
+  // Hvis spilleren har mistet et liv, gjenoppliv spilleren så lenge den røde firkanten ikke har nådd en viss størrelse
+  // Hvis spilleren har null liv, legg til poengsummen i highscore-listen og vis highscore-listen
+}
+
+// Lag en funksjon for å legge til poeng til poengsummen
+function addScore() {
+  // Legg til 1 poeng for hvert sekund spilleren overlever
+}
+
+// Lag en funksjon for å øke størrelsen på den røde firkanten
+function increaseRedSquareSize() {
+  // Øk størrelsen på den røde firkanten med 10 pixler hver minutt
+}
+
+// Lag en funksjon for å oppdatere highscore-listen
+function updateHighScore() {
+  // Legg til poengsummen i en databasebasert highscore-liste
+  // Vis highscore-listen på skjermen
+}
+function moveBlueSquare(){
+
+}
+</script>
 <div>
   <p>Highscores</p>
 </div>
 <br>
 <br>
-<p>Login to start playing!</p>
-
+<%if(!user){%>
+<button>Login to start playing!</button>
+<%}else{%>
+<button>Press any button to start playing</button>
+<%}%>
 
 <%- include('partials/footer'); -%>

@@ -1,36 +1,48 @@
 <%- include('partials/header'); -%>
 
-<ul class="recipes">
-  <li class="recipe">
-    <img src="/smoothie.png" alt="smoothie recipe icon">
-    <h4>Banana Boost</h4>
-    <p>Banana, Vanilla ice cream, Milk</p>
-  </li>
-  <li class="recipe">
-    <img src="/smoothie.png" alt="smoothie recipe icon">
-    <h4>Tropical Twist</h4>
-    <p>Peach, Pinapple, Apple juice</p>
-  </li>
-  <li class="recipe">
-    <img src="/smoothie.png" alt="smoothie recipe icon">
-    <h4>Protein Packer</h4>
-    <p>Oats, Peanut butter, Milk, Banana, Blueberries</p>
-  </li>
-  <li class="recipe">
-    <img src="/smoothie.png" alt="smoothie recipe icon">
-    <h4>Banana Boost</h4>
-    <p>Banana, Vanilla ice cream, Milk</p>
-  </li>
-  <li class="recipe">
-    <img src="/smoothie.png" alt="smoothie recipe icon">
-    <h4>Tropical Twist</h4>
-    <p>Peach, Pinapple, Apple juice</p>
-  </li>
-  <li class="recipe">
-    <img src="/smoothie.png" alt="smoothie recipe icon">
-    <h4>Protein Packer</h4>
-    <p>Oats, Peanut butter, Milk, Banana, Blueberries</p>
-  </li>
-</ul>
+<h1>Veileder</h1>
+<br>
+<br>
+<h3>Hvordan sette opp en bruker i linux med nøkkelpålogging</h3>
+<br>
+<br>
+<div>
+<h4>Steg 1: Legge til ny bruker</h4>
+<img src="Adduser1.png" alt="" srcset="">
+<br>
+<br>
+<h4>Steg 2: Gi brukeren sudorettigheter</h4>
+<img src="Adduser2.png" alt="" srcset="">
+<p>Tips: For å sjekke at det fungerer prøv å logg in på brukeren å kjør en sudo kommando</p>
+<br>
+<br>
+<h4>Steg 3: Sette opp nøkkelpålogging, legg til .ssh mappe</h4>
+<img src="Adduser3.png" alt="" srcset="">
+<br>
+<br>
+<h4>Steg 4: Lage authorized_keys fil</h4>
+<img src="Adduser4.png" alt="" srcset="">
+<br>
+<br>
+<h4>Steg 5: Legg in public key i authorized_keys</h4>
+<img src="Adduser5.png" alt="" srcset="">
+<p>Husk å lagre filen</p>
+<br>
+<br>
+<h4>Steg 6: Installere Nodejs og Npm</h4>
+<img src="Adduser6.png" alt="" srcset="">
+<img src="Adduser7.png" alt="" srcset="">
+<br>
+<br>
+<h4>Steg 7: Klon prosjektet ditt fra github</h4>
+<p>Best å lage en egen mappe å ha prosjektet i på linux</p>
+<img src="Adduser8.png" alt="" srcset="">
+<p>Du burde kjøre Sudo npm i for å få med modules</p>
+<br>
+<br>
+<h4>Steg 8: Kjør node app</h4>
+<img src="Adduser9.png" alt="" srcset="">
+<p>Slik skal det se ut når node kjører</p>
 
+</div>
 <%- include('partials/footer'); -%>
