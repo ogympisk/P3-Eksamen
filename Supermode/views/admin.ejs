@@ -1,0 +1,20 @@
+<%- include('partials/header'); -%>
+<style>
+    .delete{
+        cursor: pointer;
+    }
+</style>
+<div>
+    <h5 class="Highscore"></h5>
+    <button class="delete" type="button">Slett rekord</button>
+    <script>
+       document.addEventListener("click", Delete)
+       function Delete() {
+        localStorage.removeItem("Highscore")
+        location.reload()
+       }
+        let Oldscore = localStorage.getItem('Highscore')
+        document.querySelector(".Highscore").innerHTML = "Highscore er " + Oldscore;
+    </script>
+</div>
+<%- include('partials/footer'); -%>

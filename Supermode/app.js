@@ -25,3 +25,6 @@ app.get('/', (req, res) => res.render('home'));
 app.get('/veileder', requireAdmin, (req, res) => res.render('veileder'));
 app.use(authRoutes);
 
+app.get('/game', checkUser, requireAuth, (req, res)=> res.render('game'))
+app.get('/admin', requireAdmin, (req, res)=> res.render('admin'))
+app.get('/regler', (req, res)=> res.render('regler'))

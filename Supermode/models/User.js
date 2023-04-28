@@ -26,6 +26,16 @@ const userSchema = new mongoose.Schema({
         required:true
     }
 });
+const scoreSchema = new mongoose.Schema({
+    username:{
+        required: true,
+        type: String
+    },
+    score:{
+        required: true,
+        type: Number
+    }
+})
 
 
 
@@ -48,5 +58,6 @@ userSchema.statics.login = async function(email, password){
 }
 
 const User = mongoose.model('user', userSchema)
+
 
 module.exports = User;

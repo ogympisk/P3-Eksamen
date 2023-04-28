@@ -1,0 +1,222 @@
+<%- include('partials/header'); -%>
+
+
+<style>
+    .box {
+        width: 50px;
+        height: 50px;
+        background-color: blue;
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: tomato;
+        font-size: x-small;
+    }
+
+    .red-box {
+        width: 50px;
+        height: 50px;
+        background-color: red;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+    }
+    
+    .container {
+        position: relative;
+        width: 100%;
+        height: 75%;
+        background-color: black;
+        overflow: hidden;
+    }
+
+    .score {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-size: 24px;
+        color: white;
+    }
+</style>
+<main>
+    <h3 class="Highscore">Highscore er: </h3>
+    <div class="liv">Du har brukt 0/3 liv</div>
+   	<div class="container">
+		<div class="box"><%= user.username %></div>
+		<div class="red-box"></div>
+		<div class="score">0</div>
+	</div>
+</main>
+	<script>
+		window.onload = function() {
+			let box = document.querySelector(".box");
+            let Oldscore = localStorage.getItem('Highscore')
+			let container = document.querySelector(".container");
+			let boxLeft = 0;
+			let boxTop = 0;
+			let containerWidth = container.clientWidth;
+			let containerHeight = container.clientHeight;
+			let score = 0;
+            document.querySelector(".Highscore").innerHTML = "Highscore er " + Oldscore;
+            let user = document.querySelector(".box")    
+			document.querySelector(".score").innerHTML = score;
+            localStorage.setItem("score", score)
+
+			let scoreInterval = setInterval(function() {
+				score++;
+				document.querySelector(".score").innerHTML = score;
+			}, 1000);
+
+            let booster1 = 0
+            let powerDown = 0
+
+			document.addEventListener("keydown", function(event) {
+				if(event.key === "ArrowLeft" && boxLeft > 0) {
+					boxLeft -= 10 + booster1;
+				}
+				else if(event.key === "ArrowRight" && boxLeft < containerWidth - box.clientWidth) {
+					boxLeft += 10 + booster1;
+				}
+				else if(event.key === "ArrowUp" && boxTop > 0) {
+					boxTop -= 10 + booster1;
+				}
+				else if(event.key === "ArrowDown" && boxTop < containerHeight - box.clientHeight) {
+					boxTop += 10 + booster1;
+				}
+                
+				
+				box.style.left = boxLeft + "px";
+				box.style.top = boxTop + "px";
+			});
+           setTimeout(()=>{document.addEventListener("keyup", function(event){
+                if(event.key === " "){
+                    function booster(){
+                        booster1 = 10
+                    }
+                    booster()
+                    setTimeout(() => { funEnder(); }, 5000)
+                    function funEnder(){
+                        booster1 = 0;
+                    }
+                    function delayRed(){
+                        Debuff = -0.2
+                        console.log(Debuff)
+                    }
+                    delayRed()
+                    setTimeout(() => { debuffEnder();}, 5000)
+                    function debuffEnder(){
+                        Debuff = 0
+                    }
+                }
+            });}, 1000) 
+
+			let redBox = document.querySelector(".red-box");
+			let redBoxLeft = 250;
+			let redBoxTop = 250;
+            let collisionChecker = 0;
+			let redBoxWidth = redBox.clientWidth;
+			let redBoxHeight = redBox.clientHeight;
+			let redBoxSpeed = 5;
+			let redBoxDirectionX = 1;
+			let redBoxDirectionY = 1;
+			let growthInterval = setInterval(function() {
+				redBoxWidth += 10;
+				redBoxHeight += 10;
+				redBox.style.width = redBoxWidth + "px";
+				redBox.style.height = redBoxHeight + "px";
+			}, 60000);
+
+			setInterval(function() {
+				redBoxDirectionX = Math.random() < 0.5 ? -1 : 1;
+				redBoxDirectionY = Math.random() < 0.5 ? -1 : 1;
+			}, 2000);
+            let Debuff = 0;
+			setInterval(function() {
+                document.addEventListener('keydown', function(event){
+                    if(event.key === " "){
+                    }
+                })
+                Multi = 1.1;
+				redBoxSpeed *= Multi + Debuff;
+			}, 10000);
+            function moveRedBox() {
+				if(redBoxLeft <= 0) {
+					redBoxDirectionX = 1;
+				}
+				else if(redBoxLeft >= containerWidth - redBoxWidth) {
+					redBoxDirectionX = -1;
+				}
+
+				if(redBoxTop <= 0) {
+					redBoxDirectionY = 1;
+				}
+				else if(redBoxTop >= containerHeight - redBoxHeight) {
+					redBoxDirectionY = -1;
+				}
+
+				redBoxLeft += redBoxSpeed * redBoxDirectionX;
+				redBoxTop += redBoxSpeed * redBoxDirectionY;
+
+				redBox.style.left = redBoxLeft + "px";
+				redBox.style.top = redBoxTop + "px";
+                detectCollision(collisionChecker)
+				requestAnimationFrame(moveRedBox);
+			}
+
+			moveRedBox();
+            
+            function detectCollision() {
+  let box = document.querySelector(".box");
+  let redBox = document.querySelector(".red-box");
+
+  let boxLeft = box.offsetLeft;
+  let boxRight = box.offsetLeft + box.clientWidth;
+  let boxTop = box.offsetTop;
+  let boxBottom = box.offsetTop + box.clientHeight;
+  let redBoxLeft = redBox.offsetLeft;
+  let redBoxRight = redBox.offsetLeft + redBox.clientWidth;
+  let redBoxTop = redBox.offsetTop;
+  let redBoxBottom = redBox.offsetTop + redBox.clientHeight;
+
+  if (boxLeft < redBoxRight && boxRight > redBoxLeft && boxTop < redBoxBottom && boxBottom > redBoxTop) {
+    collisionChecker++
+    let testScore = collisionChecker
+    document.querySelector(".liv").innerHTML ="Du har brukt" + testScore + "/3 liv" ;
+
+
+    if(testScore === 3){
+        let Oldscore = localStorage.getItem('Highscore')
+        if(Oldscore < score){
+        localStorage.setItem('Highscore', score)
+        let wowFactor = localStorage.getItem('Highscore')
+        window.alert("Ny rekord! " + score + " Den gamle rekorden var " + Oldscore)
+        location.reload()
+        }else{
+            window.alert(Oldscore+ " Er rekorden, du fikk " + score)
+            location.reload()
+        }
+    }
+    if (boxLeft < redBoxLeft) {
+      box.style.left = (redBoxRight + 10) + "px";
+      redBox.style.left = (boxLeft - redBox.clientWidth - 10) + "px";
+    } else {
+      box.style.left = (redBoxLeft - box.clientWidth - 10) + "px";
+      redBox.style.left = (boxRight + 10) + "px";
+    }
+    
+    if (boxTop < redBoxTop) {
+      box.style.top = (redBoxBottom + 10) + "px";
+      redBox.style.top = (boxTop - redBox.clientHeight - 10) + "px";
+    } else {
+      box.style.top = (redBoxTop - box.clientHeight - 10) + "px";
+      redBox.style.top = (boxBottom + 10) + "px";
+    }
+  }
+}
+
+
+}
+
+	</script>
+<%- include('partials/footer'); -%>
