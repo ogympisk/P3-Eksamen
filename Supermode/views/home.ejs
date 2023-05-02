@@ -1,6 +1,6 @@
 <%- include('partials/header'); -%>
 <div>
-  <p>Highscores</p>
+  <p class="Highscore"></p>
 </div>
 <br>
 <br>
@@ -9,6 +9,8 @@
 <%}else{%>
 <button>Press any button to start playing</button>
 <script>
+  let Oldscore = localStorage.getItem('Highscore')
+   document.querySelector(".Highscore").innerHTML = "Highscore er " + Oldscore;
   document.addEventListener('keydown', (event)=>{
     location.assign('/game')
   })
